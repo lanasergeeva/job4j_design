@@ -20,3 +20,7 @@ notifications:
       -dkimlana@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
+
+ev:
+  global:
+    - CODECOV_TOKEN = 8eab5a94-4126-41a0-b023-dc2f5f158b99
