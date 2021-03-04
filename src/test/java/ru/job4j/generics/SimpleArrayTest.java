@@ -2,8 +2,9 @@ package ru.job4j.generics;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
-
 import org.junit.Test;
+import java.util.NoSuchElementException;
+
 public class SimpleArrayTest {
 
     @Test
@@ -53,7 +54,7 @@ public class SimpleArrayTest {
         assertThat(check, is(50));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = NoSuchElementException.class)
     public void whenExep() {
         Integer[] array = new Integer[50];
         SimpleArray<Integer> test = new SimpleArray<>(array);
