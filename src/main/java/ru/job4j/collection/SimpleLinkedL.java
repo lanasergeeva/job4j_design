@@ -1,4 +1,4 @@
-package ru.job4j.generics;
+package ru.job4j.collection;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -49,12 +49,12 @@ public class SimpleLinkedL<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator() {
-            private int position = 0;
+            private Node<E> check = first;
             private final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return position < size;
+                return check != null;
             }
 
             @Override
@@ -65,7 +65,9 @@ public class SimpleLinkedL<E> implements Iterable<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return get(position++);
+                E item = check.item;
+                check = check.next;
+                return item;
             }
         };
     }
