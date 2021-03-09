@@ -49,4 +49,23 @@ public class SimpleArray<T> implements Iterable<T> {
             }
         };
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SimpleArray<?> that = (SimpleArray<?>) o;
+        return modCount == that.modCount && capacity == that.capacity && size == that.size && Arrays.equals(container, that.container);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(modCount, capacity, size);
+        result = 31 * result + Arrays.hashCode(container);
+        return result;
+    }
 }
