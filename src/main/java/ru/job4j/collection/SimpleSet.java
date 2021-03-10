@@ -16,8 +16,8 @@ public class SimpleSet<T> implements Iterable<T> {
 
     public boolean check(T model) {
         boolean rsl = true;
-        for (T type : simpleArray) {
-            if (type.equals(model)) {
+        for (Object ob : simpleArray) {
+            if (Objects.equals(model, ob)) {
                 rsl = false;
                 break;
             }
