@@ -29,7 +29,7 @@ public class SimpleMap<K, V> implements Iterable<Node<K, V>> {
 
     public boolean delete(K key) {
         int index = hash(key);
-        if (hashtable[index] != null) {
+        if (hashtable[index] != null && hashtable[index].getKey().equals(key)) {
             hashtable[index] = null;
             elements--;
         }
