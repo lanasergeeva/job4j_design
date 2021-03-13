@@ -64,7 +64,7 @@ public class FlatMapTest {
         flat.next();
     }
 
-    /*@Test
+   /* @Test
     public void whenSeveralEmptyAndNotEmpty() {
         Iterator<Iterator<?>> it = List.of(
                 List.of().iterator(),

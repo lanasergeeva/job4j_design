@@ -11,7 +11,6 @@ public class SimpleLinkedL<E> implements Iterable<E> {
     private Node<E> first;
     private Node<E> last;
 
-
     public void add(E value) {
         final Node<E> l = last;
         final Node<E> newNode = new Node<>(l, value, null);

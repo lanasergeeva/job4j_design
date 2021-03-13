@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 
 public class ForwardLinkedTest  {
-   /* @Test(expected = NoSuchElementException.class)
+ @Test(expected = NoSuchElementException.class)
     public void whenDeleteFirst() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
         linked.add(1);
@@ -21,9 +21,10 @@ public class ForwardLinkedTest  {
     public void whenDeleteEmptyLinked() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
         linked.deleteFirst();
-    }*/
+    }
 
-    /*@Test
+
+@Test
     public void whenMultiDelete() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
         linked.add(1);
@@ -41,9 +42,10 @@ public class ForwardLinkedTest  {
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
-    }*/
+    }
 
-    /*@Test
+
+@Test
     public void whenAddAndRevertThenIter() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
         linked.add(1);
@@ -65,5 +67,6 @@ public class ForwardLinkedTest  {
         ForwardLinked<Integer> singleList = new ForwardLinked<>();
         singleList.add(1);
         assertFalse(singleList.revert());
-    }*/
+    }
+
 }
