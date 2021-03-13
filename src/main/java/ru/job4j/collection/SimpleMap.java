@@ -24,7 +24,7 @@ public class SimpleMap<K, V> implements Iterable<Node<K, V>> {
     }
 
     public V get(K key) {
-        return hashtable[hash(key)].getValue();
+        return hashtable[hash(key)].getKey().equals(key) ? hashtable[hash(key)].getValue() : null;
     }
 
     public boolean delete(K key) {
@@ -32,6 +32,7 @@ public class SimpleMap<K, V> implements Iterable<Node<K, V>> {
         if (hashtable[index] != null && hashtable[index].getKey().equals(key)) {
             hashtable[index] = null;
             elements--;
+            modCount++;
         }
         return hashtable[index] == null;
     }
