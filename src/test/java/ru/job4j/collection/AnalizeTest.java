@@ -19,6 +19,7 @@ public class AnalizeTest {
     Analize.User user7 = new Analize.User(27, "Michel");
     Analize.User user8 = new Analize.User(27, "Nazar");
 
+
     @Test
     public void whenTheSame() {
         List<Analize.User> list = new ArrayList<>(Arrays.asList(user1, user2, user3, user5));
