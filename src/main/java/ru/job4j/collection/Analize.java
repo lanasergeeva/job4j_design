@@ -72,9 +72,9 @@ public class Analize {
 
     public static class Info {
 
-        int added;
-        int changed;
-        int deleted;
+        private int added;
+        private int changed;
+        private int deleted;
 
         public int getAdded() {
             return added;
@@ -87,7 +87,6 @@ public class Analize {
         public int getDeleted() {
             return deleted;
         }
-
     }
 }
 
