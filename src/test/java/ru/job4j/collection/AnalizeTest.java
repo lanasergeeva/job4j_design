@@ -18,6 +18,9 @@ public class AnalizeTest {
     Analize.User user6 = new Analize.User(26, "Ratmir");
     Analize.User user7 = new Analize.User(27, "Michel");
     Analize.User user8 = new Analize.User(27, "Nazar");
+    Analize.User user9 = new Analize.User(28, "Ratmir2");
+    Analize.User user10 = new Analize.User(29, "Michel2");
+    Analize.User user11 = new Analize.User(30, "Nazar2");
 
 
     @Test
@@ -67,6 +70,16 @@ public class AnalizeTest {
         Analize.Info info = new Analize().diff(list, check);
         assertThat(info.getAdded(), is(2));
         assertThat(info.getDeleted(), is(0));
+        assertThat(info.getChanged(), is(0));
+    }
+
+    @Test
+    public void whenWas3Delete3Add6() {
+        List<Analize.User> list = new ArrayList<>(Arrays.asList(user1, user2, user3));
+        List<Analize.User> check = new ArrayList<>(Arrays.asList(user5, user6, user8, user9, user10, user11));
+        Analize.Info info = new Analize().diff(list, check);
+        assertThat(info.getAdded(), is(6));
+        assertThat(info.getDeleted(), is(3));
         assertThat(info.getChanged(), is(0));
     }
 }

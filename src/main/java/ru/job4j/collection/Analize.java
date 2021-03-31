@@ -16,13 +16,13 @@ public class Analize {
             if (!user.getName().equals(map.get(user.getId()))) {
                 info.changed++;
             }
+            if (map.get(user.getId()) == null) {
+                info.added++;
+
+            }
         }
-        if (map.keySet().size() < current.size()) {
-            info.added = current.size() - map.keySet().size();
-            info.changed = info.changed - info.added;
-        } else if (map.keySet().size() > current.size()) {
-            info.deleted = map.keySet().size() - current.size();
-        }
+        info.changed = info.changed - info.added;
+        info.deleted = map.keySet().size() + info.added - current.size();
         return info;
     }
 
