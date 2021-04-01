@@ -1,29 +1,26 @@
 package ru.job4j.io;
 
-import junit.framework.TestCase;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class AnalizyTest {
 
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
+
     @Test
     public void whenOnlyPeriod() throws IOException {
-        String source = "server.log";
-        String target = "rsl.log";
+        File target = folder.newFile("target.txt");
         Analizy analizy = new Analizy();
-        try {
-            analizy.unavailable(source, target);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        StringBuffer sb = new StringBuffer();
-        try (BufferedReader in = new BufferedReader(new FileReader("rsl.log"))) {
+        analizy.unavailable("server.log", target.getAbsolutePath());
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(sb::append);
         }
         assertThat(sb.toString(), is("10:57:01 to 10:59:01"
