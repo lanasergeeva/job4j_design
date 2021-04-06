@@ -12,7 +12,7 @@ public class Zip {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (Path path : sources) {
                 zip.putNextEntry(new ZipEntry(path.toFile().getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(path.toFile().getPath()))) {
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(path.toFile()))) {
                     zip.write(out.readAllBytes());
                 }
             }
@@ -41,4 +41,5 @@ public class Zip {
                 (p -> !(p.toFile().getName().endsWith(argsName.get("e"))))), new File(argsName.get("o")));
     }
 }
+
 

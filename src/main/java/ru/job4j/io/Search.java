@@ -14,7 +14,7 @@ public class Search {
             throw new IllegalArgumentException("Root folder is null or there are is not parameters of files");
         }
         Path start = Paths.get(args[1]);
-        search(start, p -> p.toFile().getName().endsWith(args[0])).forEach(System.out::println);
+        search(start, p -> !p.toFile().getName().endsWith(args[0]))/*forEach(System.out::println*/;
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {

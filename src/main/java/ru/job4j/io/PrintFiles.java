@@ -20,26 +20,26 @@ public class PrintFiles implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
+    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         return CONTINUE;
     }
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         if (predicate.test(file)) {
             list.add(file);
-            System.out.println("Name of file is " + file.getFileName());
+            //System.out.println("Name of file is " + file.getFileName());
         }
         return CONTINUE;
     }
 
     @Override
-    public FileVisitResult visitFileFailed(Path file, IOException exc) {
+    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
         return CONTINUE;
     }
 
     @Override
-    public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
         return CONTINUE;
     }
 
