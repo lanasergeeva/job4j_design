@@ -12,16 +12,26 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
-                    while (!(str = in.readLine()).isEmpty()) {
+                    String str = in.readLine();
+                    while ((str != null) && !(str.isEmpty())) {
                         System.out.println("Вывод :" + str);
-                        if (str.contains("msg=Bye")) {
+                        if (str.contains("msg=Hello")) {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write("Hello\r\n\r\n".getBytes());
+                            break;
+                        } else if (str.contains("msg=Exit")) {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write("Завершить работу сервера\r\n\r\n".getBytes());
                             server.close();
+                            break;
+                            } else {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write("What\r\n\r\n".getBytes());
+                            break;
                         }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                 }
             }
-        }
+        } //curl -i http://localhost:9000/?msg=Hello
     }
 }
