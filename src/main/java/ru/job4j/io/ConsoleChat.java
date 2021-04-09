@@ -27,7 +27,7 @@ public class ConsoleChat {
         Scanner scanner = new Scanner(System.in);
         String text = "";
         listAnswers();
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(path))) {
+        List<String> list = new LinkedList<>();
             while (!text.equals(OUT)) {
                 System.out.println("Введите слово");
                 text = scanner.nextLine();
@@ -37,15 +37,15 @@ public class ConsoleChat {
                 if (CONTINUE.equals(text)) {
                     result = true;
                 }
-                out.write(text + "\n");
+                list.add(text);
                 if (result && !text.equals(OUT)) {
                     String answer = getRandom();
                     System.out.println(answer);
-                    out.write(answer + "\n");
+                    list.add(answer);
                 }
             }
+            log(list);
         }
-    }
 
     public void listAnswers() throws IOException {
         try (BufferedReader in = new BufferedReader(new FileReader(botAnswers))) {
@@ -61,6 +61,19 @@ public class ConsoleChat {
         Random random = new Random();
         int index = random.nextInt(list.size() - 1);
         return list.get(index);
+    }
+
+    public void log(List<String> list) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(path)
+                ))) {
+            for (String s : list) {
+                out.println(s);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws IOException {
