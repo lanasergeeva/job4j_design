@@ -14,8 +14,11 @@ public class UsageLog4j {
         long l = 1544878745L;
         short s = 99;
         byte b = 8;
-        LOG.debug("char is : {}, double is : {}, float is : {}, int is : {}, long is : {}, short is : {}, byte is : {}",
-                ch, d, f, i, l, s, b);
+        boolean log = true;
+        LOG.debug("char is : {}, double is : {}, float is : {}, int is : {}",
+                ch, d, f, i);
+        LOG.debug("long is : {}, short is : {}, byte is : {}, boolean is : {},",
+                l, s, b, log);
         /*  LOG.trace("trace message");
         LOG.debug("debug message");
         LOG.info("info message");
