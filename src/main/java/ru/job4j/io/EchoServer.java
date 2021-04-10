@@ -15,23 +15,21 @@ public class EchoServer {
                     String str = in.readLine();
                     while ((str != null) && !(str.isEmpty())) {
                         System.out.println("Вывод :" + str);
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         if (str.contains("msg=Hello")) {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("Hello\r\n\r\n".getBytes());
                             break;
                         } else if (str.contains("msg=Exit")) {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("Завершить работу сервера\r\n\r\n".getBytes());
                             server.close();
                             break;
                             } else {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("What\r\n\r\n".getBytes());
                             break;
                         }
                     }
                 }
-            }
+            } //cd C:\Tools\curl-7.76.0-win64-mingw\bin
         } //curl -i http://localhost:9000/?msg=Hello
     }
 }
