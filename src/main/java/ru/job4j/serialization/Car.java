@@ -1,8 +1,18 @@
 package ru.job4j.serialization;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
+import javax.xml.bind.annotation.XmlAttribute;
+
+@XmlElement(value = "car")
 public class Car {
-    private  String model;
-    private  String color;
+    @XmlAttribute
+    private String model;
+    @XmlAttribute
+    private String color;
+
+    public Car() {
+    }
 
     public Car(String model, String color) {
         this.model = model;
