@@ -3,13 +3,17 @@ package ru.job4j.serialization;
 /*import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;*/
 
+import org.json.JSONObject;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @XmlRootElement(name = "student")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -35,6 +39,22 @@ public class Student {
         this.subjects = subjects;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isFullTime() {
+        return fullTime;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public String[] getSubjects() {
+        return subjects;
+    }
+
     @Override
     public String toString() {
         return "Student{"
@@ -46,9 +66,23 @@ public class Student {
     }
 
     public static void main(String[] args) throws Exception {
+        /* JSONObject из json-строки строки */
+        JSONObject jsonCar = new JSONObject("{\"model\":\"Nissan Teana\", \"color\":\"black\"}");
+        System.out.println(jsonCar.toString());
+        /* JSONObject напрямую методом put */
         Student student = new Student("Ivan", true, new Car("Nissan Teana", "Red"), "philology",
                 "mathematics");
-        JAXBContext context = JAXBContext.newInstance(Student.class);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", student.getName());
+        jsonObject.put("fullTime", student.isFullTime());
+        jsonObject.put("car", jsonCar);
+        jsonObject.put("subjects", student.getSubjects());
+        System.out.println(jsonObject.toString());
+        System.out.println(new JSONObject(student).toString());
+    }
+}
+
+       /* JAXBContext context = JAXBContext.newInstance(Student.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String result;
@@ -63,9 +97,9 @@ public class Student {
             // десериализуем
             Student rsl = (Student) unmarshaller.unmarshal(reader);
             System.out.println(rsl);
-        }
-    }
-}
+        }*/
+
+
 
         /*Student student = new Student("Ivan", true, new Car("Nissan Teana", "Red"), "philology",
                 "mathematics");
