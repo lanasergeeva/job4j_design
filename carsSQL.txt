@@ -1,0 +1,24 @@
+create table cars(
+      id serial primary key,
+      model varchar(255),
+      count_of_doors integer,
+	  age date
+);
+insert into cars(model, count_of_doors, age) 
+values('Hyunday Accent', 4, '2007-01-08');
+
+insert into cars(model, count_of_doors, age) 
+values('Niva Legend', 5, '2018-05-03');
+
+insert into cars(model, count_of_doors, age) 
+values('Peugeot 208', 3, '2012-12-03');
+
+insert into cars(model, count_of_doors, age) 
+values('Peugeot 208', 3, '2012-12-03');
+
+update cars set model = 'Peugeot 308', count_of_doors = 5 
+where model = 'Peugeot 208';
+
+delete from cars where model = 'Niva Legend';
+
+select * from cars;
