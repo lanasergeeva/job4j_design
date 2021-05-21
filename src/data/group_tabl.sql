@@ -53,13 +53,6 @@ values(1, 4);
 
 insert into devices_people
 (people_id, device_id)
-values(1, 2);
-insert into devices_people
-(people_id, device_id)
-values(1, 3);
-
-insert into devices_people
-(people_id, device_id)
 values(2, 2);
 insert into devices_people
 (people_id, device_id)
