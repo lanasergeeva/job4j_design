@@ -55,7 +55,7 @@ insert into "comments"
 values('table name is Drinks', 1);
 
 insert into attachs 
-(text, item_id)
+(name, item_id)
 values('price of drinks', 1);
 
 
