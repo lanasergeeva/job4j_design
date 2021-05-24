@@ -67,10 +67,9 @@ select *
 from products p
 where name like '%мороженное%';
 
-/*я специально год добавила. можно и без него*/
 select * from products
-where to_char(expired_date, 'MM') = to_char((current_date+interval '1' month), 'MM')
-and to_char(expired_date, 'RR') = to_char((current_date + interval '1' month), 'RR');
+where date_part('month', expired_date) = 
+date_part('month', now() + interval '1' month);
 
 select *
 from products
