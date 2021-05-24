@@ -78,17 +78,21 @@ values(4, 4);
 select avg(price)
 from devices;
 
-select avg(price) 
+select p.name, avg(price) allprice
 from devices_people dp
 join devices d
 on(d.id = dp.device_id)
-group by people_id
-order by people_id;
+join people p
+on(p.id = dp.device_id)
+group by p.name
+order by allprice desc;
 
-select avg(price)
+select p.name, avg(price) allprice
 from devices_people dp
 join devices d
 on(d.id = dp.device_id)
-group by people_id
+join people p
+on(p.id = dp.device_id)
+group by p.name
 having avg(price) > 5000
-order by people_id;
+order by allprice desc;
