@@ -22,6 +22,14 @@ public class ConfigTest {
         assertThat(config.value("hibernate.connection.password"), is("password"));
     }
 
+    @Test
+    public void whenAre2() {
+        String path = "app.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("hibernate.connection.password"), is("password"));
+    }
+
     @Test (expected = IllegalArgumentException.class)
     public void whenThereAreEmptyValue() {
         String path = "app2.properties";
