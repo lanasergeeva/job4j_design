@@ -76,5 +76,6 @@ join potential_participants p
 on (p.meeting_id = m.id)
 group by m.name, p.status
 having count(status = 'deny') = 
-(select count(*) from users);
+(select count(*) from users) or 
+count(*) = 0;
 
