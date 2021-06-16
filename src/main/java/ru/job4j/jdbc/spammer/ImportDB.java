@@ -50,9 +50,9 @@ public class ImportDB {
 
     /**
      * У меня был уже готовый метод. Поэтому я сюда просто скопировала и добавила ресурсы.
-     * @param values
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @param values varags
+     * @throws SQLException ошибка
+     * @throws ClassNotFoundException ошибка
      */
     public void createTab(String... values) throws SQLException, ClassNotFoundException {
         Class.forName(cfg.getProperty("jdbc.driver"));
