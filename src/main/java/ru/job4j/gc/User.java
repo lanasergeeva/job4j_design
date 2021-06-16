@@ -55,8 +55,8 @@ public class User {
         System.out.println(GraphLayout.parseInstance((Object) userEmpt).toFootprint());
         System.out.println(GraphLayout.parseInstance((Object) user).toFootprint());*/
         info();
-        for (int i = 1; i < 100000; i++) {
-             new User("Ivan", "admin" + i);
+        for (int i = 1; i < 7000; i++) {
+             new User("Ivan", "admin");
 
         }
         //System.gc();
