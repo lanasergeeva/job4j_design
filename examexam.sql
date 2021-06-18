@@ -17,6 +17,23 @@ status varchar check (status = 'accept' or status = 'deny')
 
 delete from potential_participants;
 
+insert into meeting
+values(4, 'subbotmik');
+insert into meeting
+values(5,'cleaning');
+
+insert into potential_participants
+values(30, 1, 5, 'deny');
+
+insert into potential_participants
+values(26, 1, 4, 'deny');
+insert into potential_participants
+values(27, 2, 4, 'deny');
+insert into potential_participants
+values(28, 3, 4,'deny');
+insert into potential_participants
+values(29, 4, 4,'deny');
+
 insert into potential_participants
 values(1, 1, 1, 'accept');
 insert into potential_participants
@@ -55,9 +72,12 @@ select m.name, count(*)
 from meeting m 
 join potential_participants p
 on(m.id=p.meeting_id)
-where m.name = (
-select name from meeting where id=2 ) 
-and 
-p.status = 'deny'
+where m.name not in (
+select m.name from meeting m
+join potential_participants p
+on (p.meeting_id = m.id)
+where p.status= 'accept'
+)
 group by  m.name;
+
 
