@@ -70,9 +70,9 @@ on (p.meeting_id = m.id)
 group by m.name, meeting_id, status
 having status = 'accept';
 
-select ms.name, count(*) 
+select ms.name, count(status) 
 from meeting ms 
-join potential_participants p
+left join potential_participants p
 on(ms.id=p.meeting_id)
 where ms.name not in (
 select m.name
@@ -80,12 +80,7 @@ from meeting m
 join potential_participants p
 on (p.meeting_id = m.id)
 where p.status= 'accept') 
-group by  ms.name
-union all
-select  m.name, count(p.status)  from meeting m
-left join potential_participants p
-on (p.meeting_id = m.id)
-group by  m.name
-having count(p.status) = 0;
+group by  ms.name;
+
 
 
