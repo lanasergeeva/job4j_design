@@ -21,6 +21,8 @@ insert into meeting
 values(4, 'subbotmik');
 insert into meeting
 values(5,'cleaning');
+insert into meeting
+values(6,'utrenik');
 
 insert into potential_participants
 values(30, 1, 5, 'deny');
@@ -68,16 +70,22 @@ on (p.meeting_id = m.id)
 group by m.name, meeting_id, status
 having status = 'accept';
 
-select m.name, count(*) 
-from meeting m 
+select ms.name, count(*) 
+from meeting ms 
 join potential_participants p
-on(m.id=p.meeting_id)
-where m.name not in (
-select m.name from meeting m
+on(ms.id=p.meeting_id)
+where ms.name not in (
+select m.name
+from meeting m  
 join potential_participants p
 on (p.meeting_id = m.id)
-where p.status= 'accept'
-)
-group by  m.name;
+where p.status= 'accept') 
+group by  ms.name
+union all
+select  m.name, count(p.status)  from meeting m
+left join potential_participants p
+on (p.meeting_id = m.id)
+group by  m.name
+having count(p.status) = 0;
 
 
