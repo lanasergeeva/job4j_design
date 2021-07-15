@@ -33,11 +33,11 @@ public class DirFileCache extends AbstractCache<String, String> {
                     br.lines()
                             .map(line -> line + System.lineSeparator())
                             .forEach(builder::append);
-
                 } catch (IOException e) {
                     System.out.println("Wrong path");
                     e.printStackTrace();
                 }
+                break;
             }
         }
         return builder.toString();
