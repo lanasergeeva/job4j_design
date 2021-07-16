@@ -50,17 +50,13 @@ public class User {
     }
 
     public static void main(String[] args) {
-    /*    User userEmpt = new User();
-        User user = new User("Ivan", "admin");
-        System.out.println(GraphLayout.parseInstance((Object) userEmpt).toFootprint());
-        System.out.println(GraphLayout.parseInstance((Object) user).toFootprint());*/
-        info();
+       /* info();
         for (int i = 1; i < 7000; i++) {
              new User("Ivan", "admin");
 
         }
         //System.gc();
         System.out.println("info");
-        info();
+        info();*/
     }
 }

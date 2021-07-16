@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class EmulatorTest {
@@ -31,6 +32,7 @@ public class EmulatorTest {
         AbstractCache<String, String> abs =
                 new Emulator(dir.getAbsolutePath());
         abs.put(source1.getName(), abs.load(source1.getName()));
+        abs.get(source2.getName());
         assertEquals(2, abs.cache.size());
     }
 }

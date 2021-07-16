@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class StrongDemo {
-    public static void main(String[] args) throws InterruptedException {
+    /*public static void main(String[] args) throws InterruptedException {
         //example1();
         //example2();
         example3();
@@ -52,5 +52,5 @@ public class StrongDemo {
         while (true) {
             strings.add(String.valueOf(System.currentTimeMillis()));
         }
-    }
+    }*/
 }
