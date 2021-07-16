@@ -1,37 +1,36 @@
 package ru.job4j.gc.cache;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 
 public class EmulatorTest {
 
-    @Test
-    public void testGetWhenFileFromAnotherDirectory() throws IOException {
-        AbstractCache<String, String> abs =
-                new Emulator("C:\\Users\\Лана\\Desktop\\Soft");
-        String st = abs.get("notexist.txt");
-        assertFalse(abs.cache.containsKey("notexist"));
-    }
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
+
 
     @Test
-    public void testLoad() throws IOException {
+    public void testGetandPut() throws IOException {
+        File dir = folder.newFolder("dir");
+        File source1 = folder.newFile("dir/test.txt");
+        File source2 = folder.newFile("dir/test2.txt");
+        try (PrintWriter out = new PrintWriter(source1)) {
+            out.println("hello how are you");
+        }
+        try (PrintWriter out = new PrintWriter(source2)) {
+            out.println("how are you");
+        }
         AbstractCache<String, String> abs =
-                new Emulator("C:\\Users\\Лана\\Desktop\\Soft");
-        String st = abs.load("notexist.txt");
-        assertTrue(st.isEmpty());
+                new Emulator(dir.getAbsolutePath());
+        abs.put(source1.getName(), abs.load(source1.getName()));
+        assertEquals(2, abs.cache.size());
     }
-
-    @Test
-    public void testPutwhenFileFromAnother() throws IOException {
-        AbstractCache<String, String> abs =
-                new Emulator("C:\\Users\\Лана\\Desktop\\Soft");
-        abs.put("notexist.txt", abs.load("notexist.txt"));
-        assertTrue(abs.cache.isEmpty());
-    }
-
 }

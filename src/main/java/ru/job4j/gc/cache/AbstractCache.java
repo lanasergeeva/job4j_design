@@ -11,20 +11,24 @@ public abstract class AbstractCache<K, V> {
     public void put(K key, V value) {
         if (value != null && value != "") {
             SoftReference<V> softReference = new SoftReference<>(value);
-            cache.putIfAbsent(key, softReference);
+            cache.put(key, softReference);
         } else {
-            System.out.println("File is empty or file is not exist");
+            System.out.println("Value is empty or null");
         }
     }
 
-    public V get(K key) throws IOException {
-        V rsl;
+    public V get(K key)  {
+        V rsl = null;
         SoftReference<V> softReference = cache.get(key);
         if (softReference != null) {
             rsl = softReference.get();
         } else {
-            rsl = load(key);
-            put(key, rsl);
+            try {
+                rsl = load(key);
+                put(key, rsl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return rsl;
     }
