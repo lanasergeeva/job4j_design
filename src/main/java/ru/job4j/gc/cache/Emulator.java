@@ -10,7 +10,7 @@ public class Emulator extends DirFileCache {
     }
 
     @Override
-    public String get(String key)  {
+    public String get(String key) throws IOException {
         return super.get(key);
     }
 
