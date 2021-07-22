@@ -10,63 +10,42 @@ public class CSVReader {
     public static void main(String[] args) throws IOException {
         CSVReader reader = new CSVReader();
         reader.parseValidate(args);
-        Map<String, List<String>> map;
-        map = reader.csvParse();
-        log(map);
+        List<String> st;
+        st = reader.csvParse();
+        log(st, new PrintStream(VALUES.get("out")));
     }
 
 
-    public Map<String, List<String>> csvParse() {
-        List<String> list;
-        Map<String, List<String>> map = new HashMap<>();
+    public List<String> csvParse() throws IOException {
+        List<String> list = new ArrayList<>(Arrays.asList(VALUES.get("filter").split(VALUES.get("delimiter")))); //получаю столбцы из фильтра
         try (Scanner sc = new Scanner(Path.of(VALUES.get("path")))
                 .useDelimiter(VALUES.get("delimiter"))) {
-            String first = sc.nextLine();
-            String[] array = first.split(VALUES.get("delimiter"));
-            List<String> filter = Arrays.asList(VALUES.get("filter").split(VALUES.get("delimiter")));
-            for (String s : array) {
-                if (filter.contains(s)) {
-                    map.put(s, new ArrayList<>());
+            String[] array = sc.nextLine().split(VALUES.get("delimiter")); //читаю "шапку"/первую строку со столбцами и закидываю ее в массив
+            List<Integer> ints = new ArrayList<>(); //создаю лист для индексов
+            for (int i = 0; i < array.length; i++) {
+                if (list.contains(array[i])) { //перебираю массив и сравниваю каждое значение с фильтром
+                    ints.add(i); //индексы сохраняю в лист
                 }
             }
-            while (sc.hasNextLine()) {
-                Scanner word = new Scanner(sc.nextLine()).useDelimiter(VALUES.get("delimiter"));
+            while (sc.hasNextLine()) { //сканер построчно проходит по файлу со второй строки
+                Scanner word = new Scanner(sc.nextLine()).useDelimiter(VALUES.get("delimiter")); //второй сканер для прохода по словам
                 while (word.hasNext()) {
-                    for (String sr : array) {
-                        String w = word.next();
-                        if (filter.contains(sr)) {
-                            list = map.get(sr);
-                            list.add(w);
-                            map.put(sr, list);
+                    for (int i = 0; i < array.length; i++) { //array содержит количество столбцов в шапке, а значит и количество значений в строке
+                        String w = word.next(); //проходим по значениям
+                        if (ints.contains(i)) {
+                            list.add(w); //сравниваю столбы со значением по индексу
                         }
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return map;
+        return list;
     }
 
-    public static void log(Map<String, List<String>> param) {
-        if (VALUES.get("out").equals("stdout")) {
-            for (Map.Entry<String, List<String>> entry : param.entrySet()) {
-                System.out.println(entry.getKey() + entry.getValue());
-            }
-            System.out.println("In console");
-        } else if (new File(VALUES.get("out")).isAbsolute()) {
-            try (PrintWriter out = new PrintWriter(
-                    new BufferedOutputStream(
-                            new FileOutputStream(VALUES.get("out"))
-                    ))) {
-                for (Map.Entry<String, List<String>> entry : param.entrySet()) {
-                    out.println(entry.getKey());
-                    out.println(entry.getValue());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println("In out file");
+    public static void log(List<String> param, PrintStream printStream) {
+        for (String st : param) {
+            printStream.println(st);
+            System.out.println(st);
         }
     }
 
