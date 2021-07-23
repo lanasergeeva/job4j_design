@@ -12,7 +12,7 @@ public class CSVReader {
         reader.parseValidate(args);
         List<String> st;
         st = reader.csvParse();
-        log(st, new PrintStream(VALUES.get("out")));
+        log(st, new PrintStream(System.out));
     }
 
 
@@ -21,7 +21,7 @@ public class CSVReader {
         try (Scanner sc = new Scanner(Path.of(VALUES.get("path")))
                 .useDelimiter(VALUES.get("delimiter"))) {
             String[] array = sc.nextLine().split(VALUES.get("delimiter")); //читаю "шапку"/первую строку со столбцами и закидываю ее в массив
-            List<Integer> ints = new ArrayList<>(); //создаю лист для индексов
+            Set<Integer> ints = new HashSet<>(); //создаю лист для индексов
             for (int i = 0; i < array.length; i++) {
                 if (list.contains(array[i])) { //перебираю массив и сравниваю каждое значение с фильтром
                     ints.add(i); //индексы сохраняю в лист
@@ -42,10 +42,13 @@ public class CSVReader {
         return list;
     }
 
-    public static void log(List<String> param, PrintStream printStream) {
+    public static void log(List<String> param, PrintStream printStream) throws FileNotFoundException {
+        String type = VALUES.get("out");
+        if (new File(type).isAbsolute()) {
+            printStream = new PrintStream(type);
+        }
         for (String st : param) {
             printStream.println(st);
-            System.out.println(st);
         }
     }
 
