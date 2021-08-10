@@ -27,4 +27,22 @@ public class MaxMinTest {
         assertThat(rsl, is(1));
     }
 
+    @Test
+    public void whenMin1() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        MaxMin max = new MaxMin();
+        int rsl = max.min(list, Comparator.comparingInt(numb -> numb));
+        assertThat(rsl, is(1));
+    }
+
+    @Test
+    public void whenMax2() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        MaxMin max = new MaxMin();
+        int rsl = max.max(list, Comparator.comparingInt(numb -> numb));
+        assertThat(rsl, is(5));
+    }
+
+
+
 }
