@@ -1,4 +1,4 @@
-package ru.job4j.kiss;
+package ru.job4j.ood.kiss;
 
 public class SqMax {
     public static int max(int left, int right) {
