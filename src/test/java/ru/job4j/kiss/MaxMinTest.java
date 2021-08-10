@@ -1,8 +1,6 @@
 package ru.job4j.kiss;
 
-import junit.framework.TestCase;
 import org.junit.Test;
-import ru.job4j.collection.ListUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
