@@ -12,7 +12,7 @@ public class CSVReader {
         reader.parseValidate(args);
         List<String> st;
         st = reader.csvParse();
-        log(st, new PrintStream(System.out));
+        log(st, new PrintStream(VALUES.get("out")));
     }
 
 
@@ -42,12 +42,12 @@ public class CSVReader {
         return list;
     }
 
-    public static void log(List<String> param, PrintStream printStream) throws FileNotFoundException {
-        for (String st : param) {
-            printStream.println(st);
-            System.out.println(st);
+    public static void log(List<String> param, PrintStream printStream) {
+            for (String st : param) {
+                printStream.println(st);
+            }
         }
-    }
+
 
 
     public void parseValidate(String[] args) {
