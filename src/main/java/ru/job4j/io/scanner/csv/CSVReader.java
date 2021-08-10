@@ -43,12 +43,9 @@ public class CSVReader {
     }
 
     public static void log(List<String> param, PrintStream printStream) throws FileNotFoundException {
-        String type = VALUES.get("out");
-        if (new File(type).isAbsolute()) {
-            printStream = new PrintStream(type);
-        }
         for (String st : param) {
             printStream.println(st);
+            System.out.println(st);
         }
     }
 
