@@ -1,3 +1,4 @@
+/*
 package ru.job4j.ood.tdd;
 
 import static org.junit.Assert.assertThat;
@@ -36,9 +37,6 @@ public class CinemaTest {
         cinema.add(session3D);
         List<Session> sessions = cinema.find(listSession -> listSession.equals(session3D));
         assertThat(sessions.get(0), is(session3D));
-
-
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -59,4 +57,6 @@ public class CinemaTest {
         Ticket ticket = cinema.buy(account, 1, 1, date);
         Ticket ticket1 = cinema.buy(account, 1, 1, date);
     }
+
 }
+*/
