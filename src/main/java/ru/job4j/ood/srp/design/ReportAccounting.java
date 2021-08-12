@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 public class ReportAccounting implements Report {
 
+
     private Store store;
 
     public ReportAccounting(Store store) {
@@ -12,13 +13,16 @@ public class ReportAccounting implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
+        double euro = 86.4;
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary");
+        text.append("Name; Hired; Fired; Salary;");
         for (Employee employee : store.findBy(filter)) {
-            text.append(employee.getName()).append(";")
+            text.append(System.lineSeparator())
+                    .append(employee.getName())
+                    .append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary()).append(";")
+                    .append(employee.getSalary() * euro).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();
