@@ -7,6 +7,7 @@ import org.junit.Test;
 import ru.job4j.ood.srp.design.*;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ReportEngineTest {
 
@@ -34,16 +35,16 @@ public class ReportEngineTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Report engine = new ReportEngine(store);
+        ReportAccounting reportAccounting = new ReportAccounting(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
-                .append(worker.getSalary()).append(";")
+                .append(worker.getSalary() * 86.4).append(";")
                 .append(System.lineSeparator());
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertThat(reportAccounting.generate(em -> true), is(expect.toString()));
     }
 
     @Test
@@ -74,10 +75,11 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         ReportIT reportIT = new ReportIT(store);
-        StringBuilder expect = new StringBuilder()
-                .append("<html>" + ls + "<head>" + ls + "<title>Отчёт</title>" + ls + "</head>" + ls)
-                .append("<H1>Сотрудники</H1>" + ls + "<p> ")
-                .append("Name; Hired; Fired; Salary </p>" + ls + "<p> ")
+        StringBuilder expect = new StringBuilder().append("<html>").append(ls).append("<head>").append(ls)
+                .append("<title>Отчёт</title>").append(ls).append("</head>").append(ls)
+                .append("<H1>Сотрудники</H1>").append(ls).append("<p> ")
+                .append("Name; Hired; Fired; Salary </p>")
+                .append(ls).append("<p> ")
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
@@ -85,5 +87,59 @@ public class ReportEngineTest {
                 .append(" </p>")
                 .append(System.lineSeparator());
         assertThat(reportIT.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenReportXML() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 3569);
+        Employee worker2 = new Employee("Ilya", now, now, 4569);
+        store.add(worker);
+        store.add(worker2);
+        ReportXML reportXML = new ReportXML(store);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append("\n")
+                .append("<employee name=\"Ivan\" salary=\"3569.0\"/>")
+                .append("\n")
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append("\n")
+                .append("<employee name=\"Ilya\" salary=\"4569.0\"/>")
+                .append("\n");
+        assertThat(reportXML.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenReportJSON() {
+        String st;
+        MemStore store = new MemStore();
+        Calendar date = new GregorianCalendar(2015, 5, 8);
+        Employee worker = new Employee("Ivan", date, date, 100);
+        store.add(worker);
+        ReportJSON json = new ReportJSON(store);
+        st = "{"
+                + "\"name\":\"Ivan\","
+                + "\"hired\":"
+                + "{"
+                + "\"year\":2015,"
+                + "\"month\":5,"
+                + "\"dayOfMonth\":8,"
+                + "\"hourOfDay\":0,"
+                + "\"minute\":0,"
+                + "\"second\":0"
+                + "},"
+                + "\"fired\":"
+                + "{"
+                + "\"year\":2015,"
+                + "\"month\":5,"
+                + "\"dayOfMonth\":8,"
+                + "\"hourOfDay\":0,"
+                + "\"minute\":0,"
+                + "\"second\":0"
+                + "},"
+                + "\"salary\":100.0"
+                + "}";
+        assertThat(json.generate(em -> true), is(st));
     }
 }
