@@ -1,3 +1,4 @@
+/*
 package ru.job4j.ood.template;
 
 import static org.junit.Assert.assertEquals;
@@ -38,3 +39,4 @@ public class GeneratorTest {
         temp.produce(test, map);
     }
 }
+*/
