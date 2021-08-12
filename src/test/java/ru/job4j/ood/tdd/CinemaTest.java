@@ -36,6 +36,9 @@ public class CinemaTest {
         cinema.add(session3D);
         List<Session> sessions = cinema.find(listSession -> listSession.equals(session3D));
         assertThat(sessions.get(0), is(session3D));
+
+
+
     }
 
     @Test(expected = IllegalArgumentException.class)
