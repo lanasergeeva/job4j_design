@@ -101,11 +101,13 @@ public class ReportEngineTest {
         StringBuilder expect = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .append("\n")
-                .append("<employee name=\"Ivan\" salary=\"3569.0\"/>")
+                .append("<employees>")
                 .append("\n")
-                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append("    <employees name=\"Ivan\" salary=\"3569.0\"/>")
                 .append("\n")
-                .append("<employee name=\"Ilya\" salary=\"4569.0\"/>")
+                .append("    <employees name=\"Ilya\" salary=\"4569.0\"/>")
+                .append("\n")
+                .append("</employees>")
                 .append("\n");
         assertThat(reportXML.generate(em -> true), is(expect.toString()));
     }
@@ -118,7 +120,7 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", date, date, 100);
         store.add(worker);
         ReportJSON json = new ReportJSON(store);
-        st = "{"
+        st = "[{"
                 + "\"name\":\"Ivan\","
                 + "\"hired\":"
                 + "{"
@@ -139,7 +141,7 @@ public class ReportEngineTest {
                 + "\"second\":0"
                 + "},"
                 + "\"salary\":100.0"
-                + "}";
+                + "}]";
         assertThat(json.generate(em -> true), is(st));
     }
 }
