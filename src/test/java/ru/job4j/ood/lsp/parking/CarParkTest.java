@@ -1,0 +1,71 @@
+package ru.job4j.ood.lsp.parking;
+
+import org.junit.Test;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
+
+
+public class CarParkTest {
+    /* В CarPark выделяются места для машин и траков в одном массиве, в случае, когда траки
+    заполнены, а места для легковых есть, то траки заполняются на места легковых
+    исходя из своего размера (пример - при размере 2 = 2 места в массиве, которые предназначались для легковых).
+        Также у меня есть счетчики для машин(на них выхожу через геттеры - getCars, getTrucks).
+        Я их спользую в тестах.
+     */
+
+    @Test
+    public void whenJustPark() {
+        CarPark cars = new CarPark(3, 1);
+        Car car1 = new Car(1);
+        cars.parking(car1);
+        assertThat(cars.parking(car1), is(true));
+    }
+
+    @Test
+    public void whenSize3Cars1TruckAnd4Cars() {
+        CarPark cars = new CarPark(3, 1);
+        Car car1 = new Car(1);
+        Truck car2 = new Truck(2);
+        cars.parking(car1);
+        cars.parking(car1);
+        cars.parking(car1);
+        cars.parking(car1);
+        assertThat(cars.getCar(), is(3));
+    }
+
+    @Test
+    public void whenSize4Cars3Trucks1() {
+        CarPark cars = new CarPark(2, 1);
+        Car car1 = new Car(1);
+        Truck car2 = new Truck(2);
+        cars.parking(car1);
+        cars.parking(car1);
+        cars.parking(car2);
+        assertThat(cars.getTruck(), is(1));
+        assertThat(cars.getCar(), is(2));
+    }
+
+    @Test
+    public void whenSizeFor3Cars1TrucksAnd3Trucks() {
+        CarPark cars = new CarPark(2, 1);
+        Truck car2 = new Truck(2);
+        cars.parking(car2);
+        cars.parking(car2);
+        cars.parking(car2);
+        assertThat(cars.getTruck(), is(2));
+    }
+
+    @Test
+    public void whenSize3ForCars2Truck1andRsl2Truck() {
+        CarPark cars = new CarPark(2, 1);
+        Car car1 = new Car(1);
+        Truck car2 = new Truck(2);
+        cars.parking(car2);
+        cars.parking(car2);
+        cars.parking(car1);
+        cars.parking(car1);
+        assertThat(cars.getTruck(), is(2));
+        assertThat(cars.getCar(), is(0));
+    }
+}
