@@ -3,8 +3,8 @@ package ru.job4j.ood.lsp.parking;
 public class Car implements Transport {
 
     private int size;
-    public Car(int size) {
-        this.size = size;
+    public Car() {
+        this.size = 1;
     }
 
     @Override
