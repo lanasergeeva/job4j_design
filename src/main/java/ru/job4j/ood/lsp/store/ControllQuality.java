@@ -1,6 +1,7 @@
 package ru.job4j.ood.lsp.store;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ControllQuality {
@@ -15,6 +16,18 @@ public class ControllQuality {
             store.location(food, today);
         }
     }
+
+    public void resort(LocalDate today) {
+        List<Food> all = new LinkedList<>();
+        for (Store store : storeList) {
+            all.addAll(store.getList());
+            store.getList().clear();
+        }
+        for (Food food : all) {
+            executeStore(food, today);
+        }
+    }
+
 
     public static void main(String[] args) {
         Food water = new Food("Вода газ", LocalDate.of(2021, 8, 20),
@@ -36,6 +49,8 @@ public class ControllQuality {
         for (Food food : foodList) {
             cq.executeStore(food, LocalDate.of(2021, 8, 15));
         }
+        System.out.println(stores);
+        cq.resort(LocalDate.of(2021, 8, 16));
         System.out.println(stores);
     }
 }
