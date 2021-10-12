@@ -96,7 +96,6 @@ public class ImportDB {
             cfg.load(in);
         }
         ImportDB db = new ImportDB(cfg, "./src/main/java/ru/job4j/jdbc/spammer/dump.txt");
-        //db.createTab("users", "name varchar(50)", "email varchar(50)");
         db.save(db.load());
     }
 }

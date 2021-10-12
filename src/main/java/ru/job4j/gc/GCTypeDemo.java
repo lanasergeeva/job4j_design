@@ -10,7 +10,6 @@ public class GCTypeDemo {
             data[i] = String.valueOf(
                     (char) random.nextInt(255)
             ).repeat(length);
-            //System.out.println("PID процесса:" + ProcessHandle.current().pid());
         }
     }
 }

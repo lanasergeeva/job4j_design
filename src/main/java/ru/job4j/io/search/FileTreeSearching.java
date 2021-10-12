@@ -1,6 +1,5 @@
 package ru.job4j.io.search;
 
-import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -20,7 +19,7 @@ public class FileTreeSearching extends SimpleFileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
         if (predicate.test(file)) {
             list.add(file);
         }

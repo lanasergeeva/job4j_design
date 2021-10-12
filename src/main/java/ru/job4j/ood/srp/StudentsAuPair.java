@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StudentsAuPair implements AuPair {
 
-    private List<Student> students = new LinkedList<>();
+    private List<Student> students;
 
     public StudentsAuPair(List<Student> students) {
         this.students = students;

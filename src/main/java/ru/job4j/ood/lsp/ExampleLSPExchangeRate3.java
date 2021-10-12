@@ -69,7 +69,6 @@ public class ExampleLSPExchangeRate3 {
             Client client = new Client("Ivan", "569897", true);
             Bank bank = new Bank();
             bank.getMoney(56847, client);
-
         }
     }
 }

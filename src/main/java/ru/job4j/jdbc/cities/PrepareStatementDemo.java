@@ -19,17 +19,6 @@ public class PrepareStatementDemo {
         connection = DriverManager.getConnection(url, login, password);
     }
 
-/*    public void insertWithouId(City city) {
-        try (PreparedStatement statement =
-                     connection.prepareStatement("insert into cities(name, population) values (?, ?)")) {
-            statement.setString(1, city.getName());
-            statement.setInt(2, city.getPopulation());
-            statement.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-
     public boolean update(City city) {
         boolean result = false;
         try (PreparedStatement statement =
@@ -92,7 +81,7 @@ public class PrepareStatementDemo {
         return city;
     }
 
-    public void createTabCities(String...values) throws SQLException {
+    public void createTabCities(String... values) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "create table  %s (%s, %s, %s);",
@@ -104,7 +93,7 @@ public class PrepareStatementDemo {
 
     public void deleteTabCities(String tableName) throws SQLException {
         try (Statement statement = connection.createStatement()) {
-            String sql = String.format("drop table %s;",  tableName
+            String sql = String.format("drop table %s;", tableName
             );
             statement.execute(sql);
         }
@@ -115,32 +104,6 @@ public class PrepareStatementDemo {
         City two = new City(652, "Simferopol", 500000);
         City two3 = new City(2, "Kerch", 250000);
         PrepareStatementDemo pr = new PrepareStatementDemo();
-        //pr.createTabCities("citiesBest", "id serial primary key", "name text", "population int");
-       /* System.out.println(pr.insert(one, "citiesBest"));
-        System.out.println(pr.insert(two, "citiesBest"));
-        System.out.println(pr.insert(two3, "citiesBest"));*/
-       /* City one = new City(44, "Kyev", 4500000);
-        City two = new City(652, "Simferopol", 500000);
-        System.out.println(pr.insert(two, "cities"));
-        City two3 = new City(2, "Kerch", 250000);
-        System.out.println(pr.update(two3));*/
         System.out.println(pr.findAll("citiesBest"));
     }
 }
-
-    /*public static void main(String[] args) throws Exception {
-        String o = "uy";
-        try (Connection connection = getConnection()) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "create table  %s (%s, %s);",
-                        o,
-                        "id serial primary key",
-                        "name text",
-                        "population int"
-                );
-                statement.execute(sql);
-                System.out.println(getTableScheme(connection, o));
-            }
-        }
-    }*/

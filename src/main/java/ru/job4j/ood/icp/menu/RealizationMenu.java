@@ -48,5 +48,6 @@ public class RealizationMenu implements ShowMenu, SelectMenu, Action {
                                 new Menu("Задача 3.1.2"))))))));
         System.out.println(rz.getList());
         System.out.println(rz.select("Задача 2"));
+        rz.action("Задача 1");
     }
 }

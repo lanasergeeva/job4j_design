@@ -17,23 +17,23 @@ public class CSVReader {
 
 
     public List<String> csvParse() throws IOException {
-        List<String> list = new ArrayList<>(Arrays.asList(VALUES.get("filter").split(VALUES.get("delimiter")))); //получаю столбцы из фильтра
+        List<String> list = new ArrayList<>(Arrays.asList(VALUES.get("filter").split(VALUES.get("delimiter"))));
         try (Scanner sc = new Scanner(Path.of(VALUES.get("path")))
                 .useDelimiter(VALUES.get("delimiter"))) {
-            String[] array = sc.nextLine().split(VALUES.get("delimiter")); //читаю "шапку"/первую строку со столбцами и закидываю ее в массив
-            Set<Integer> ints = new HashSet<>(); //создаю лист для индексов
+            String[] array = sc.nextLine().split(VALUES.get("delimiter"));
+            Set<Integer> ints = new HashSet<>();
             for (int i = 0; i < array.length; i++) {
-                if (list.contains(array[i])) { //перебираю массив и сравниваю каждое значение с фильтром
-                    ints.add(i); //индексы сохраняю в лист
+                if (list.contains(array[i])) {
+                    ints.add(i);
                 }
             }
-            while (sc.hasNextLine()) { //сканер построчно проходит по файлу со второй строки
-                Scanner word = new Scanner(sc.nextLine()).useDelimiter(VALUES.get("delimiter")); //второй сканер для прохода по словам
+            while (sc.hasNextLine()) {
+                Scanner word = new Scanner(sc.nextLine()).useDelimiter(VALUES.get("delimiter"));
                 while (word.hasNext()) {
-                    for (int i = 0; i < array.length; i++) { //array содержит количество столбцов в шапке, а значит и количество значений в строке
-                        String w = word.next(); //проходим по значениям
+                    for (int i = 0; i < array.length; i++) {
+                        String w = word.next();
                         if (ints.contains(i)) {
-                            list.add(w); //сравниваю столбы со значением по индексу
+                            list.add(w);
                         }
                     }
                 }
@@ -42,7 +42,7 @@ public class CSVReader {
         return list;
     }
 
-    public static void log(List<String> param)  {
+    public static void log(List<String> param) {
         String type = VALUES.get("out");
         if (type.equals("stdout")) {
             for (String st : param) {

@@ -3,7 +3,6 @@ package ru.job4j.ood.srp;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.Random;
 
 import java.util.List;
 

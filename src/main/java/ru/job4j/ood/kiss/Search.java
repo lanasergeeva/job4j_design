@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Search {
-    //добавила для работы метода
     public static List<File> files = new ArrayList<>();
 
     static List<File> findBy(Predicate<File> predicate) {

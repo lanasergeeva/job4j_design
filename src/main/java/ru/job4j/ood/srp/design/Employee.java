@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.*;
 import java.util.Calendar;
 import java.util.Objects;
 
-
 @XmlRootElement(name = "employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {

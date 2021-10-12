@@ -14,7 +14,6 @@ public class LogicWin implements LogicInterface {
     public boolean isGameEnd() {
         return checkAllMatrix() || checkDiagonals() || checksPossible();
     }
-    // Проверка победы на колонках и столбиках
 
     public boolean checkAllMatrix() {
         boolean rsl = false;
@@ -34,10 +33,6 @@ public class LogicWin implements LogicInterface {
         return rsl;
     }
 
-
-    // Проверка победы по диагоналям
-
-
     public boolean checkDiagonals() {
         boolean rsl = false;
         boolean bRowWin = true, bColWin = true;
@@ -52,7 +47,6 @@ public class LogicWin implements LogicInterface {
         return rsl;
     }
 
-    // Проверка существования новых ходов
     public boolean checksPossible() {
         for (int i = 0; i < matrix.getMatrix().length; i++) {
             switch (mm.getX(i)) {

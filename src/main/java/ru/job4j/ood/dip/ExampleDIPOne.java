@@ -1,6 +1,5 @@
 package ru.job4j.ood.dip;
 
-
 public class ExampleDIPOne {
 
     class Photographer {
@@ -12,8 +11,8 @@ public class ExampleDIPOne {
     }
 
     class Camera {
-       public Photo  makePhoto(String name) {
-           return new Photo(name);
+        public Photo makePhoto(String name) {
+            return new Photo(name);
         }
     }
 

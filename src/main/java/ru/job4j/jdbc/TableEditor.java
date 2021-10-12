@@ -1,4 +1,5 @@
 package ru.job4j.jdbc;
+
 import ru.job4j.io.Config;
 
 import java.sql.*;
@@ -23,9 +24,9 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void ddl(String argument) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                statement.execute(argument);
-            }
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(argument);
+        }
     }
 
     private static Connection getConnection() throws Exception {
@@ -39,23 +40,23 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        ddl(String.format("create table %s (id serial primary key);",  tableName));
+        ddl(String.format("create table %s (id serial primary key);", tableName));
     }
 
     public void dropTable(String tableName) throws Exception {
-        ddl(String.format("drop table %s;",  tableName));
+        ddl(String.format("drop table %s;", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        ddl(String.format("alter table %s add %s %s;",  tableName, columnName, type));
+        ddl(String.format("alter table %s add %s %s;", tableName, columnName, type));
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        ddl(String.format("alter table %s drop column %s;",  tableName, columnName));
+        ddl(String.format("alter table %s drop column %s;", tableName, columnName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        ddl(String.format("alter table %s rename column %s  to %s;",  tableName, columnName, newColumnName));
+        ddl(String.format("alter table %s rename column %s  to %s;", tableName, columnName, newColumnName));
     }
 
     public String getScheme(String tableName) throws SQLException {

@@ -11,7 +11,7 @@ public class ConfigTest {
         String path = "app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.connection.password"), is("password"));
+        assertThat(config.value("hibernate.connection.password"), is("lana90max"));
     }
 
     @Test
@@ -19,7 +19,7 @@ public class ConfigTest {
         String path = "app1.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.connection.password"), is("password"));
+        assertThat(config.value("hibernate.connection.password"), is("lana90max"));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ConfigTest {
         String path = "app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.connection.password"), is("password"));
+        assertThat(config.value("hibernate.connection.password"), is("lana90max"));
     }
 
     @Test (expected = IllegalArgumentException.class)

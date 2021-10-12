@@ -7,6 +7,11 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * cd C:\Tools\curl-7.76.0-win64-mingw\bin
+ * curl -i http://localhost:9000/?msg=Hello
+ */
+
 public class EchoServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(EchoServer.class.getName());
@@ -40,5 +45,5 @@ public class EchoServer {
         } catch (IOException e) {
             LOG.error("Exception in EchoServer", e);
         }
-    } //cd C:\Tools\curl-7.76.0-win64-mingw\bin
-} //curl -i http://localhost:9000/?msg=Hello
+    }
+}

@@ -5,11 +5,9 @@ public class ExampleDIP3 {
     class EventLogWriter {
 
         public EventLogWriter() {
-            // Конструктор
         }
 
         public void write(String message) {
-            // Конструктор
         }
     }
 
@@ -18,7 +16,7 @@ public class ExampleDIP3 {
         EventLogWriter writer = null;
 
         public AppManager() {
-            // Конструктор
+
         }
 
         void notify(String message) {

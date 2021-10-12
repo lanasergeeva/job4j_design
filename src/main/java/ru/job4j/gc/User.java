@@ -1,6 +1,5 @@
 package ru.job4j.gc;
 
-import org.openjdk.jol.info.GraphLayout;
 
 public class User {
     private String name;
@@ -47,16 +46,5 @@ public class User {
         System.out.printf("Free: %d%n", freeMemory / MB);
         System.out.printf("Total: %d%n", totalMemory / MB);
         System.out.printf("Max: %d%n", maxMemory / MB);
-    }
-
-    public static void main(String[] args) {
-       /* info();
-        for (int i = 1; i < 7000; i++) {
-             new User("Ivan", "admin");
-
-        }
-        //System.gc();
-        System.out.println("info");
-        info();*/
     }
 }

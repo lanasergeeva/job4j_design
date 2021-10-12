@@ -12,8 +12,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private Set<FileProperty> files = new HashSet<>();
     private Map<FileProperty, Path> map = new HashMap<>();
 
-   /* @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+
+    public FileVisitResult visitFileFirst(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(file.toFile().length(), file.toFile().getName());
         if (files.contains(fileProperty)) {
             System.out.println(file.toAbsolutePath());
@@ -21,7 +21,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
             files.add(fileProperty);
         }
         return FileVisitResult.CONTINUE;
-    }*/
+    }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

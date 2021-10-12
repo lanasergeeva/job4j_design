@@ -22,32 +22,32 @@ public class ConsoleChat {
         return list;
     }
 
-    public void run() throws IOException {
+    public void run() {
         boolean result = true;
         Scanner scanner = new Scanner(System.in);
         String text = "";
         listAnswers();
         List<String> list = new LinkedList<>();
-            while (!text.equals(OUT)) {
-                System.out.println("Введите слово");
-                text = scanner.nextLine();
-                if (STOP.equals(text)) {
-                    result = false;
-                }
-                if (CONTINUE.equals(text)) {
-                    result = true;
-                }
-                list.add(text);
-                if (result && !text.equals(OUT)) {
-                    String answer = getRandom();
-                    System.out.println(answer);
-                    list.add(answer);
-                }
+        while (!text.equals(OUT)) {
+            System.out.println("Введите слово");
+            text = scanner.nextLine();
+            if (STOP.equals(text)) {
+                result = false;
             }
-            log(list);
+            if (CONTINUE.equals(text)) {
+                result = true;
+            }
+            list.add(text);
+            if (result && !text.equals(OUT)) {
+                String answer = getRandom();
+                System.out.println(answer);
+                list.add(answer);
+            }
         }
+        log(list);
+    }
 
-    public void listAnswers() throws IOException {
+    public void listAnswers() {
         try (BufferedReader in = new BufferedReader(new FileReader(botAnswers))) {
             list = in.lines()
                     .flatMap(line -> Stream.of(line.split("\\s+")))

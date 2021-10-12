@@ -13,8 +13,6 @@ public class Sizes {
     public HashMap<String, String> hashMap = new HashMap<>();
 
     public static void main(String[] args) {
-        /*System.out.println(VM.current().details());
-        System.out.println(ClassLayout.parseClass(A.class).toPrintable());*/
         int[] array = {1, 2, 1, 4, 4, 4};
         System.out.println(GraphLayout.parseInstance((Object) array).toFootprint());
         System.out.println("array");
@@ -31,12 +29,6 @@ public class Sizes {
         System.out.println(GraphLayout.parseInstance(userdd).toFootprint());
         User user3 = new User("skd", "sa");
         System.out.println(GraphLayout.parseInstance(user3).toFootprint());
-        /*String name = "sdaijhdshfsanfosf";
-        System.out.println(GraphLayout.parseInstance(name).toFootprint());
-        String name2 = "sdaijhdshfsanfosf dsfdssssssssss";
-        System.out.println(GraphLayout.parseInstance(name2).toFootprint());*/
-
-
     }
 
     public static class A {

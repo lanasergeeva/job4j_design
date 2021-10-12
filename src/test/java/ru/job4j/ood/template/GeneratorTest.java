@@ -1,8 +1,9 @@
-/*
 package ru.job4j.ood.template;
 
 import static org.junit.Assert.assertEquals;
 
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
 public class GeneratorTest {
 
     @Test
+    @Ignore
     public void whenCorrect() {
         String test = "I am a ${name}, Who are ${subject}?";
         Map<String, String> map = new HashMap<>();
@@ -21,6 +23,7 @@ public class GeneratorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void whenIncorrectTemplate() {
         String test = "I am a ${name}?";
         Map<String, String> map = new HashMap<>();
@@ -31,6 +34,7 @@ public class GeneratorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void whenIncorrectKeys() {
         String test = "I am a ${name}, Who are ${subject}?";
         Map<String, String> map = new HashMap<>();
@@ -39,4 +43,3 @@ public class GeneratorTest {
         temp.produce(test, map);
     }
 }
-*/

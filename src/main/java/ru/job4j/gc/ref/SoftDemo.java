@@ -1,11 +1,11 @@
 package ru.job4j.gc.ref;
+
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SoftDemo {
     public static void main(String[] args) {
-        //example1();
         example2();
     }
 
@@ -61,5 +61,4 @@ public class SoftDemo {
         }
         System.out.println("safe");
     }
-
 }

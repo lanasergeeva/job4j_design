@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDemo {
-   public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Config config = new Config("./src/main/resources/app.properties");
         config.load();
         Class.forName(config.value("driver_class"));
