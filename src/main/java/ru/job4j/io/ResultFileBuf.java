@@ -8,7 +8,7 @@ public class ResultFileBuf {
     public static void main(String[] args) {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(
-                        new FileOutputStream("result.txt")
+                        new FileOutputStream("src/data/hello.txt")
                 ))) {
             out.write("Hello, world!");
         } catch (Exception e) {

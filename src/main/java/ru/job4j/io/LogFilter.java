@@ -31,8 +31,8 @@ public class LogFilter {
 
 
     public static void main(String[] args) {
-        List<String> log = filter("log.txt");
+        List<String> log = filter("src/data/log.txt");
         System.out.println(log);
-        save(log, "404.txt");
+        save(log, "src/data/404.txt");
     }
 }

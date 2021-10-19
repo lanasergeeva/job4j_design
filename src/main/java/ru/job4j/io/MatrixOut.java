@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 
 public class MatrixOut {
     public static void main(String[] args) {
-        try (FileOutputStream out = new FileOutputStream("result1.txt")) {
+        try (FileOutputStream out = new FileOutputStream("src/data/matrix.txt")) {
             int[][] array = new int[9][9];
             for (int i = 0; i < array.length; i++) {
                 for (int j = 0; j < array[i].length; j++) {

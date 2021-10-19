@@ -18,7 +18,7 @@ public class AnalizyTest {
     public void whenOnlyPeriod() throws IOException {
         File target = folder.newFile("target.txt");
         Analizy analizy = new Analizy();
-        analizy.unavailable("server.log", target.getAbsolutePath());
+        analizy.unavailable("src/data/server.log", target.getAbsolutePath());
         StringBuilder sb = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(sb::append);

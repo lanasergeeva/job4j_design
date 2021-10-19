@@ -30,7 +30,7 @@ public class Analizy {
     public static void main(String[] args) {
         Analizy a = new Analizy();
         try {
-            a.unavailable("server.log", "rsl.log");
+            a.unavailable("src/data/server.log", "src/data/rsl.log");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -77,7 +77,7 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) throws IOException {
-        ConsoleChat cc = new ConsoleChat("C:\\projects\\job4j_design\\src\\data\\chat.txt", "C:\\projects\\job4j_design\\src\\data\\bot.txt");
+        ConsoleChat cc = new ConsoleChat("src/data/chat.txt", "src/data/bot.txt");
         cc.run();
         cc.listAnswers();
         System.out.println(cc.getList().toString());
