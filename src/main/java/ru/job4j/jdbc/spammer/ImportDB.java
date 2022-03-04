@@ -21,7 +21,7 @@ public class ImportDB {
             rd.lines().forEach(line -> {
                 line = new StringBuilder(line).deleteCharAt(line.lastIndexOf(";")).toString();
                 String[] array = line.split(";", 2);
-                if (array[1].isEmpty()) {
+                if (array.length != 2 && array[0].isEmpty() && array[1].isEmpty()) {
                     throw new IllegalArgumentException();
                 } else {
                     users.add(new User(array[0], array[1]));
@@ -50,8 +50,9 @@ public class ImportDB {
 
     /**
      * У меня был уже готовый метод. Поэтому я сюда просто скопировала и добавила ресурсы.
+     *
      * @param values varags
-     * @throws SQLException ошибка
+     * @throws SQLException           ошибка
      * @throws ClassNotFoundException ошибка
      */
     public void createTab(String... values) throws SQLException, ClassNotFoundException {

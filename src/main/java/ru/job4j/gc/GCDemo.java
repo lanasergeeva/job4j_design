@@ -1,9 +1,5 @@
 package ru.job4j.gc;
 
-import com.sun.tools.attach.VirtualMachine;
-import org.openjdk.jol.info.ClassLayout;
-import org.openjdk.jol.vm.VM;
-
 public class GCDemo {
     private static final long KB = 1000;
     private static final long MB = KB * KB;
@@ -21,10 +17,12 @@ public class GCDemo {
 
     public static void main(String[] args) throws Exception {
         info();
-        for (int i = 0; i < 10; i++) {
-            new Person(i, "N" + i);
+        for (int i = 0; i < 1000000; i++) {
+            new User("N" + i, "S" + i);
+            System.out.println(i);
+            Thread.sleep(5);
         }
-        System.gc();
+        /*   System.gc();*/
         info();
     }
 }

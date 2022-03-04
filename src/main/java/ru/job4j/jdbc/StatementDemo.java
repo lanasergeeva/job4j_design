@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class StatementDemo {
     private static Connection getConnection() throws Exception {
-        Config config = new Config("./src/main/resources/app.properties");
+        Config config = new Config("./src/main/resources/tracker.properties");
         config.load();
         Class.forName(config.value("driver_class"));
         String url = config.value("url");

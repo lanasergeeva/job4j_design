@@ -1,9 +1,13 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
 
+import java.io.File;
+import java.io.FileReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
+import java.util.StringJoiner;
 
 public class TableEditor implements AutoCloseable {
     private Connection connection;
@@ -29,16 +33,6 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    private static Connection getConnection() throws Exception {
-        Config config = new Config("./src/main/resources/app.properties");
-        config.load();
-        Class.forName(config.value("driver_class"));
-        String url = config.value("url");
-        String login = config.value("username");
-        String password = config.value("password");
-        return DriverManager.getConnection(url, login, password);
-    }
-
     public void createTable(String tableName) throws Exception {
         ddl(String.format("create table %s (id serial primary key);", tableName));
     }
@@ -59,6 +53,7 @@ public class TableEditor implements AutoCloseable {
         ddl(String.format("alter table %s rename column %s  to %s;", tableName, columnName, newColumnName));
     }
 
+
     public String getScheme(String tableName) throws SQLException {
         StringBuilder scheme = new StringBuilder();
         DatabaseMetaData metaData = connection.getMetaData();
@@ -76,7 +71,63 @@ public class TableEditor implements AutoCloseable {
     @Override
     public void close() throws Exception {
         if (connection != null) {
+            System.out.println("ЗАКРЫЛИСЬ");
             connection.close();
+        }
+    }
+
+    public static String getTableScheme(Connection connection, String tableName) throws Exception {
+        var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
+        var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
+        var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
+        buffer.add(header);
+        try (var statement = connection.createStatement()) {
+            var selection = statement.executeQuery(String.format(
+                    "select * from %s limit 1", tableName
+            ));
+            var metaData = selection.getMetaData();
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                buffer.add(String.format("%-15s|%-15s%n",
+                        metaData.getColumnName(i), metaData.getColumnTypeName(i))
+                );
+            }
+        }
+        return buffer.toString();
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Path fileProperties = Paths.get(
+                String.format("src%1$smain%1$sresources%1$sapp.properties", File.separator)
+        );
+        Properties properties = new Properties();
+        try (var fr = new FileReader(fileProperties.toFile())) {
+            properties.load(fr);
+        }
+        try (TableEditor tblEditor = new TableEditor(properties)) {
+            String tName = "newtable";
+            String cName = "newcolumn";
+            String rName = "rename";
+            String type = "VARCHAR(255) NOT NULL";
+            tblEditor.createTable(tName);
+            System.out.println(getTableScheme(tblEditor.getConnection(), tName));
+            tblEditor.dropTable("newtable");
+            System.out.println("Create table");
+            tblEditor.createTable(tName);
+            System.out.println("Add column:");
+            tblEditor.addColumn(tName, cName, type);
+            System.out.println(getTableScheme(tblEditor.getConnection(), tName));
+            System.out.println("Rename column:");
+            tblEditor.renameColumn(tName, cName, rName);
+            System.out.println(getTableScheme(tblEditor.getConnection(), tName));
+            System.out.println("Drop column:");
+            tblEditor.dropColumn(tName, rName);
+            System.out.println(getTableScheme(tblEditor.getConnection(), tName));
+            System.out.println("Drop table:");
+            tblEditor.dropTable("newtable");
         }
     }
 }

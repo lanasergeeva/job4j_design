@@ -11,7 +11,12 @@ public class DirFileCache extends AbstractCache<String, String> {
         this.cachingDir = cachingDir;
     }
 
-
+    /**
+     * Этим методом загружаем из файла текст в папке по пути chachingDir
+     *
+     * @param key относительный путь файла
+     * @return текст из файла
+     */
     @Override
     protected String load(String key) {
         String rsl = "";

@@ -1,5 +1,4 @@
 package ru.job4j.it;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +12,11 @@ public class FlatMap<T> implements Iterator<T> {
         this.data = data;
     }
 
+    /**
+     * Пока итератор итерирующий другой итератор(cursor) имеет что перебирать
+     * и cursor пустой, присваиваем cursor значение следующего итерируемого итератора
+     * @return
+     */
     @Override
     public boolean hasNext() {
         while (data.hasNext() && !cursor.hasNext()) {
@@ -21,6 +25,10 @@ public class FlatMap<T> implements Iterator<T> {
         return cursor.hasNext();
     }
 
+    /**
+     *
+     * @return след элемент курсора
+     */
     @Override
     public T next() {
         if (!hasNext()) {

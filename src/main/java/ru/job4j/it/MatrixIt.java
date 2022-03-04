@@ -12,6 +12,12 @@ public class MatrixIt implements Iterator<Integer> {
         this.data = data;
     }
 
+
+    /**
+     * Пока строка меньше длины массива и колонка не равна  длине строки
+     * увелчиваем строку, обнуляем колонку
+     * @return строка меньше длины массива
+     */
     @Override
     public boolean hasNext() {
         while (row < data.length && column == data[row].length) {
@@ -21,6 +27,10 @@ public class MatrixIt implements Iterator<Integer> {
         return row < data.length;
     }
 
+    /**
+     * Пока hasNext возвращаем значение из массива. После - колонку увеличиваем на 1.
+     * @return значение из массива
+     */
     @Override
     public Integer next() {
         if (!hasNext()) {

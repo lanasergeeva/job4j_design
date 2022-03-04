@@ -5,26 +5,25 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ControllQuality {
-    private List<Store> storeList;
+    private final List<Store> storeList;
 
     public ControllQuality(List<Store> storeList) {
         this.storeList = storeList;
     }
 
-    public void executeStore(Food food, LocalDate today) {
+    public void executeStore(Food food) {
         for (Store store : storeList) {
-            store.location(food, today);
+            store.accept(food);
         }
     }
 
-    public void resort(LocalDate today) {
+    public void resort() {
         List<Food> all = new LinkedList<>();
         for (Store store : storeList) {
             all.addAll(store.getList());
-            store.getList().clear();
         }
         for (Food food : all) {
-            executeStore(food, today);
+            executeStore(food);
         }
     }
 
@@ -47,10 +46,11 @@ public class ControllQuality {
         List<Store> stores = List.of(warehouse, trash, shop);
         ControllQuality cq = new ControllQuality(stores);
         for (Food food : foodList) {
-            cq.executeStore(food, LocalDate.of(2021, 8, 15));
+            cq.executeStore(food);
         }
         System.out.println(stores);
-        cq.resort(LocalDate.of(2021, 8, 16));
+        cq.resort();
         System.out.println(stores);
+
     }
 }
