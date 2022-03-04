@@ -1,6 +1,5 @@
 package ru.job4j.ood.lsp.store;
 
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +12,10 @@ public class ControllQuality {
 
     public void executeStore(Food food) {
         for (Store store : storeList) {
-            store.accept(food);
+            if (store.accept(food)) {
+                store.add(food);
+                break;
+            }
         }
     }
 
@@ -25,32 +27,5 @@ public class ControllQuality {
         for (Food food : all) {
             executeStore(food);
         }
-    }
-
-
-    public static void main(String[] args) {
-        Food water = new Food("Вода газ", LocalDate.of(2021, 8, 20),
-                LocalDate.of(2021, 8, 10), 156.98, 10);
-        Food cheese = new Food("Сыр", LocalDate.of(2021, 8, 16),
-                LocalDate.of(2021, 8, 14), 150, 30);
-        Food milk = new Food("Молоко", LocalDate.of(2021, 8, 15),
-                LocalDate.of(2021, 8, 10), 80, 40);
-        Food sauce = new Food("Хайнс", LocalDate.of(2021, 6, 24),
-                LocalDate.of(2021, 10, 12), 88.99, 10);
-        Food chocolate = new Food("Шоколад", LocalDate.of(2021, 8, 24),
-                LocalDate.of(2021, 8, 14), 88.99, 10);
-        List<Food> foodList = List.of(water, cheese, milk, sauce, chocolate);
-        Warehouse warehouse = new Warehouse();
-        Trash trash = new Trash();
-        Shop shop = new Shop();
-        List<Store> stores = List.of(warehouse, trash, shop);
-        ControllQuality cq = new ControllQuality(stores);
-        for (Food food : foodList) {
-            cq.executeStore(food);
-        }
-        System.out.println(stores);
-        cq.resort();
-        System.out.println(stores);
-
     }
 }

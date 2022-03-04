@@ -1,32 +1,36 @@
 package ru.job4j.ood.lsp.store;
 
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Warehouse implements Store {
 
-    List<Food> warehouse = new LinkedList<>();
+    private final List<Food> warehouse = new LinkedList<>();
 
     @Override
-    public void location(Food food, LocalDate today) {
-        PercentExpireDate pr = new PercentExpireDate();
-        double percent = pr.percentExpDate(food, today);
-        if (percent < 25) {
-            warehouse.add(food);
-        }
+    public boolean accept(Food food) {
+        double percent = percentExpDate(food);
+        return percent < 25;
     }
 
     @Override
     public List<Food> getList() {
-        return warehouse;
+        return new LinkedList<>(warehouse);
     }
 
     @Override
-    public void add(Food food) {
-        if (!warehouse.contains(food)) {
+    public boolean add(Food food) {
+        boolean rsl = false;
+        if (accept(food)) {
             warehouse.add(food);
+            rsl = true;
         }
+        return rsl;
+    }
+
+    @Override
+    public void clear() {
+        warehouse.clear();
     }
 
     @Override
